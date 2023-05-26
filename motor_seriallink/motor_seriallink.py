@@ -6,14 +6,16 @@ import math
 
 rpm_command = 3000
 # pid = sp.PID(Kp=0, Ki=0.1, Kd=0, setpoint=rpm_command)
-Ki = 0.1
+Ki = 0.05
 dt = 0.01
 baseline_throttle = 3900
 integrator = baseline_throttle
 
 try:
     ser = serial.Serial('/dev/tty.usbserial-A5XK3RJT', baudrate=115200, timeout=1)
-    new_conn = CastleSerialLinkControl.SerialLink(ser)
+    new_conn = CastleSerialLinkControl.SerialLink(ser, device_id=0)
+    # new_conn_1 = CastleSerialLinkControl.SerialLink(ser, device_id=1)
+    # new_conn_2 = CastleSerialLinkControl.SerialLink(ser, device_id=2)
     # print(new_conn.write_var("write throttle", 5000))
     # time.sleep(10)
     print(new_conn.read_var("speed"))
@@ -32,6 +34,8 @@ try:
         throttle_command = math.floor(integrator)
         print(f"Throttle: {throttle_command}")
         new_conn.write_var("write throttle", throttle_command)
+        # new_conn_1.write_var("write throttle", throttle_command)
+        # new_conn_2.write_var("write throttle", throttle_command)
         time.sleep(dt)
     
     time.sleep(5)
