@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "motor-seriallink"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "motor_seriallink"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+simple-pid = "^2.0.0"
+castleseriallinkcontrol = {git = "https://github.com/math2peters/CastleSerialLink.git"}
+pyserial = "^3.5"
+numpy = "^1.24.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
